@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
+export const Layout = ({ children, indice }: { children: React.ReactNode, indice: { id: string, label: string }[] }) => {
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isIndexOpen, setIndexOpen] = useState(false);
 
@@ -16,7 +16,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                     <span className="font-bold text-2xl">SAM4Devs</span>
                 </div>
                 <div className="flex items-center gap-4">
-                   
+
                     <button className="md:hidden text-white text-2xl" onClick={() => setIndexOpen(!isIndexOpen)}>☰</button>
                 </div>
             </nav>
@@ -24,31 +24,28 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             {/* Corpo do layout */}
             <div className="flex flex-1 mt-13">
                 {/* Menu lateral esquerdo */}
-                <aside className={`bg-[#2E303E] text-white p-5 fixed h-full left-0 top-14 transition-transform duration-300 md:translate-x-0 ${isMenuOpen ? "translate-x-0" : "-translate-x-64"}`}>
+                <aside className={`bg-[#2E303E] text-white p-5 fixed h-[calc(100vh-3.25rem)] mb-10 left-0 top-14 transition-transform duration-300 md:translate-x-0 ${isMenuOpen ? "translate-x-0" : "-translate-x-64"}`}>
                     <h2 className="font-bold text-lg mb-4">SAM4Devs</h2>
                     <ul>
-                        <li className="py-2"><a href="/comeceaqui" className="hover:text-blue-400">Comece Aqui</a></li>
-                        <li className="py-2 text-blue-400"><a href="#">Tipos de Processos</a></li>
-                        <li className="py-2"><a href="#" className="hover:text-blue-400">Componentes</a></li>
-                        <li className="py-2"><a href="#" className="hover:text-blue-400">Métodos</a></li>
+                        <li className="py-2"><a href="/docsamdev" className="hover:text-blue-400">Comece Aqui</a></li>
+                        <li className="py-2"><a href="/docsamdev/processos" className="hover:text-blue-400">Tipos de Processos</a></li>
+                        <li className="py-2"><a href="/docsamdev/componentes" className="hover:text-blue-400">Componentes</a></li>
+                        <li className="py-2"><a href="/docsamdev/metodos" className="hover:text-blue-400">Métodos</a></li>
                     </ul>
                 </aside>
 
                 {/* Conteúdo principal */}
-                <main className="flex-1 py-8 px-4 transition-all duration-300 md:ml-64 md:mr-64 h-[calc(100vh-3.25rem)] overflow-auto text-white">
+                <main className="flex-1 py-8 px-4 transition-all duration-300 md:ml-64 md:mr-64 h-[calc(100vh-3.25rem)] overflow-auto text-white ">
                     {children}
                 </main>
 
                 {/* Índice lateral direito */}
-                <aside className={`bg-[#2E303E] text-white p-5 fixed h-full right-0 top-14 transition-transform duration-300 md:translate-x-0 ${isIndexOpen ? "translate-x-0" : "translate-x-64"}`}>
+                <aside className={`bg-[#2E303E] text-white p-5 overflow-auto fixed right-0 h-[calc(100vh-3.25rem)] top-14 transition-transform duration-300 md:translate-x-0 ${isIndexOpen ? "translate-x-0" : "translate-x-64"}`}>
                     <h2 className="font-bold text-lg mb-4">Índice</h2>
-                    <ul>
-                        <li className="py-2"><a href="#secao1" className="hover:text-blue-400">Extração de dados</a></li>
-                        <li className="py-2"><a href="#secao2" className="hover:text-blue-400">Listagens</a></li>
-                        <li className="py-2"><a href="#" className="hover:text-blue-400">Cubo de Decisões</a></li>
-                        <li className="py-2"><a href="#" className="hover:text-blue-400">Gadgets</a></li>
-                        <li className="py-2"><a href="#" className="hover:text-blue-400">Regras de Negócios</a></li>
-                        <li className="py-2"><a href="#" className="hover:text-blue-400">Fórmulas</a></li>
+                    <ul className="mb-10">
+                        {
+                            indice.map((ind) => <li className="py-2"><a href={`#${ind.id}`} className="hover:text-blue-400">{ind.label}</a></li>)
+                        }
                     </ul>
                 </aside>
             </div>
