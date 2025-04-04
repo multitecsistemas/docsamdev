@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Layout = ({ children, indice }: { children: React.ReactNode, indice: { id: string, label: string }[] }) => {
+    const navigate = useNavigate()
+
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [isIndexOpen, setIndexOpen] = useState(false);
 
@@ -27,10 +30,10 @@ export const Layout = ({ children, indice }: { children: React.ReactNode, indice
                 <aside className={`bg-[#2E303E] text-white p-5 fixed h-[calc(100vh-3.25rem)] mb-10 left-0 top-14 transition-transform duration-300 md:translate-x-0 ${isMenuOpen ? "translate-x-0" : "-translate-x-64"}`}>
                     <h2 className="font-bold text-lg mb-4">SAM4Devs</h2>
                     <ul>
-                        <li className="py-2"><a href="/docsamdev" className="hover:text-blue-400">Comece Aqui</a></li>
-                        <li className="py-2"><a href="/docsamdev/processos" className="hover:text-blue-400">Tipos de Processos</a></li>
-                        <li className="py-2"><a href="/docsamdev/componentes" className="hover:text-blue-400">Componentes</a></li>
-                        <li className="py-2"><a href="/docsamdev/metodos" className="hover:text-blue-400">Métodos</a></li>
+                        <li className="py-2 cursor-pointer"><a onClick={()=>navigate("/home")} className="hover:text-blue-400">Comece Aqui</a></li>
+                        <li className="py-2 cursor-pointer"><a onClick={()=>navigate("/processos")} className="hover:text-blue-400">Tipos de Processos</a></li>
+                        <li className="py-2 cursor-pointer"><a onClick={()=>navigate("/componentes")} className="hover:text-blue-400">Componentes</a></li>
+                        <li className="py-2 cursor-pointer"><a onClick={()=>navigate("/metodos")} className="hover:text-blue-400">Métodos</a></li>
                     </ul>
                 </aside>
 
@@ -44,7 +47,7 @@ export const Layout = ({ children, indice }: { children: React.ReactNode, indice
                     <h2 className="font-bold text-lg mb-4">Índice</h2>
                     <ul className="mb-10">
                         {
-                            indice.map((ind) => <li className="py-2"><a href={`#${ind.id}`} className="hover:text-blue-400">{ind.label}</a></li>)
+                            indice.map((ind) => <li className="py-2"><Link to={`${ind.id}`} className="hover:text-blue-400">{ind.label}</Link></li>)
                         }
                     </ul>
                 </aside>

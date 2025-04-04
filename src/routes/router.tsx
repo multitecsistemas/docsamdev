@@ -1,14 +1,16 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "../pages/home/homePage";
 import { ProcessosPage } from "../pages/processos/ProcessosPage";
+import RedirectComponent from "../components/Redirect";
 
 export const AppRouter: React.FC = () => {
     return (
-      <BrowserRouter>
+      <HashRouter >
         <Routes>
-          <Route path="/docsamdev" element={<HomePage />} />
-          <Route path="/docsamdev/processos" element={<ProcessosPage />} />
+          <Route path="/" element={<RedirectComponent />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/processos" element={<ProcessosPage />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     );
   };

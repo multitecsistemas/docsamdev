@@ -1,14 +1,28 @@
+import { useLocation } from "react-router-dom";
 import { Layout } from "../../components/Layout"
 import { Info } from "lucide-react";
+import { useEffect } from "react";
 
 export const HomePage = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash) {
+        const id = location.hash.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" }); // ou behavior: "auto"
+        }
+        }
+    }, [location]);
+
     const indices = [
-        { id: "bemvindo", label: "Bem vindo" },
-        { id: "introducao", label: "Introdução" },
-        { id: "recomendacoes", label: "Recomendações" },
-        { id: "linguagem", label: "Linguagens Utilizadas" },
-        { id: "comofunciona", label: "Como Funciona" },
-        { id: "requisitos", label: "Requisitos" },
+        { id: "/home#bemvindo", label: "Bem vindo" },
+        { id: "/home#introducao", label: "Introdução" },
+        { id: "/home#recomendacoes", label: "Recomendações" },
+        { id: "/home#linguagem", label: "Linguagens Utilizadas" },
+        { id: "/home#comofunciona", label: "Como Funciona" },
+        { id: "/home#requisitos", label: "Requisitos" },
     ]
     return (
         <Layout indice={indices}>

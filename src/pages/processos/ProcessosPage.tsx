@@ -1,18 +1,32 @@
+import { useEffect } from "react";
 import { Layout } from "../../components/Layout"
+import { useLocation } from "react-router-dom";
 
 export const ProcessosPage = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash) {
+        const id = location.hash.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" }); // ou behavior: "auto"
+        }
+        }
+    }, [location]);
+
     const indices = [
-        { id: "tiposprocessos", label: "Tipos de Processos" },
-        { id: "extracaodados", label: "Extração de dados" },
-        { id: "listagens", label: "Listagens" },
-        { id: "cubo", label: "Cubo de Decisões" },
-        { id: "gedgets", label: "Gedgets" },
-        { id: "regrasnegocios", label: "Regras de Negócios" },
-        { id: "formulas", label: "Fórmulas" },
-        { id: "interceptadores", label: "Interceptação" },
-        { id: "scriptsoperacoes", label: "Scripts de Operações" },
-        { id: "integracaosam", label: "Integração com o SAM" },
-        { id: "servlets", label: "Servlets" },
+        { id: "/processos#tiposprocessos", label: "Tipos de Processos" },
+        { id: "/processos#extracaodados", label: "Extração de dados" },
+        { id: "/processos#listagens", label: "Listagens" },
+        { id: "/processos#cubo", label: "Cubo de Decisões" },
+        { id: "/processos#gedgets", label: "Gedgets" },
+        { id: "/processos#regrasnegocios", label: "Regras de Negócios" },
+        { id: "/processos#formulas", label: "Fórmulas" },
+        { id: "/processos#interceptadores", label: "Interceptação" },
+        { id: "/processos#scriptsoperacoes", label: "Scripts de Operações" },
+        { id: "/processos#integracaosam", label: "Integração com o SAM" },
+        { id: "/processos#servlets", label: "Servlets" },
     ]
     return (
         <Layout indice={indices}>
